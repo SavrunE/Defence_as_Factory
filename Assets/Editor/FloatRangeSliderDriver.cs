@@ -62,8 +62,8 @@ public class IntRangeSliderDriver : PropertyDrawer
 		EditorGUI.indentLevel = 0;
 		SerializedProperty minProperty = property.FindPropertyRelative("_min");
 		SerializedProperty maxProperty = property.FindPropertyRelative("_max");
-		float minValue = minProperty.floatValue;
-		float maxValue = maxProperty.floatValue;
+		float minValue = minProperty.intValue;
+		float maxValue = maxProperty.intValue;
 		float fieldWidth = position.width / 4f - 4f;
 		float sliderWidth = position.width / 2f;
 
@@ -88,8 +88,8 @@ public class IntRangeSliderDriver : PropertyDrawer
 		{
 			maxValue = minValue;
 		}
-		minProperty.floatValue = (int)minValue;
-		maxProperty.floatValue = (int)maxValue;
+		minProperty.intValue = (int)minValue;
+		maxProperty.intValue = (int)maxValue;
 		EditorGUI.EndProperty();
 		EditorGUI.indentLevel = originalIndentLevel;
 	}

@@ -549,9 +549,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyFactory: {fileID: 11400000, guid: 2b79cf2aa2d417741a4d6460e68dfb13, type: 2}
   _enemySpawnPoints: {fileID: 1962510139}
-  _enemyCount: {x: 10, y: 13}
-  _spawnSpeed: {x: 1, y: 2}
-  _enemySpeed: {x: 1, y: 2}
+  _enemyCount:
+    _min: 8
+    _max: 31
+  _spawnSpeed:
+    _min: 0.87541157
+    _max: 2.711934
+  _enemySpeed:
+    _min: 1.053395
+    _max: 2.7831278
   _enemyHealth: 3
   _playerAttackRange: 5
   _playerAttackSpeed: 0.5
