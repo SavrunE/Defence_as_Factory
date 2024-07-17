@@ -25,12 +25,15 @@ public class Game : MonoBehaviour
 	private void Awake()
 	{
 		TakeNextSpawnTime();
+		SetupPlayerSettings();
 	}
 
 	private void Update()
 	{
 		CheckEnemySpawn();
+
 		_enemyCollection.GameUpdate();
+		_gameSettings.playerCharacter.GameUpdate();
 	}
 
 	private void SetupPlayerSettings()

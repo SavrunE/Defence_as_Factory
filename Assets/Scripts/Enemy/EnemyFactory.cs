@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 [CreateAssetMenu]
 public class EnemyFactory : GameObjectFactory
@@ -13,7 +14,7 @@ public class EnemyFactory : GameObjectFactory
         return instance;
     }
 
-    public void Reclaim(Enemy enemy)
+	public void Reclaim(Enemy enemy)
     {
         Destroy(enemy.gameObject);
     }
