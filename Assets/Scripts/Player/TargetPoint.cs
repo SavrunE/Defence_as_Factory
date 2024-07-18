@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetPoint : MonoBehaviour
 {
-    public Enemy enemy { get; private set; }
-    public Vector3 position => transform.position;
+	[SerializeField] private Enemy _enemy;
+	public Enemy enemy => _enemy;
+	public Vector3 position => transform.position;
 
-    private void Awake()
-    {
-        
-    }
+	private void Awake()
+	{
+
+	}
 }

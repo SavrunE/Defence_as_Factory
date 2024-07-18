@@ -18,7 +18,7 @@ public class Game : MonoBehaviour
 	[SerializeField] private int _enemyHealth = 3;
 
 	[SerializeField] private float _playerAttackRange = 8f;
-	[SerializeField] private float _playerAttackSpeed = 0.5f;
+	[SerializeField] private float _playerAttackSpeed = 1f;
 	[SerializeField] private int _playerAttackDamage = 1;
 	[SerializeField] private float _playerBulletSpeed = 10f;
 
@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
 	{
 		TakeNextSpawnTime();
 		SetupPlayerSettings();
+		SpawnEnemy();
 	}
 
 	private void Update()
@@ -38,7 +39,7 @@ public class Game : MonoBehaviour
 
 	private void SetupPlayerSettings()
 	{
-		_gameSettings.playerCharacter.SetTargetingRange(_playerAttackRange);
+		_gameSettings.playerCharacter.InitPlayer(_playerAttackRange, _playerAttackSpeed);
 	}
 
 	private void CheckEnemySpawn()
@@ -47,11 +48,16 @@ public class Game : MonoBehaviour
 		if (_spawnProgress >= _nextSpawnTime)
 		{
 			_spawnProgress -= _nextSpawnTime;
-			Enemy enemy = _gameSettings.enemyFactory.Get();
-			enemy.SpawnOn(_gameSettings.enemySpawnPoints);
-			enemy.SetSpeed(_enemySpeed.RandomValueInRange);
-			_enemyCollection.Add(enemy);
+			SpawnEnemy();
 		}
+	}
+
+	private void SpawnEnemy()
+	{
+		Enemy enemy = _gameSettings.enemyFactory.Get();
+		enemy.SpawnOn(_gameSettings.enemySpawnPoints);
+		enemy.Init(_enemySpeed.RandomValueInRange, _enemyHealth);
+		_enemyCollection.Add(enemy);
 	}
 
 	private void TakeNextSpawnTime()

@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerCharacter : Unit
 {
 	private float _targetingRange;
 	private TargetPoint _target = null;
 
+	private float _attackSpeed;
+	private float _currentAttackTime;
+	
 	private const int ENEMY_LAYER_MASK = 1 << 9;
 
 	public void GameUpdate()
 	{
-		IsAcquireTarget();
 
-		if (_target != null)
-		{
-			_target.GetComponent<SpriteRenderer>().color = new Color(1,0,0);
-		}
+		IsAcquireTarget();
+		Attack();
 	}
 
-	public void SetTargetingRange(float range)
+	public void InitPlayer(float attackRange, float attackSpeed)
 	{
-		_targetingRange = range;
+		_targetingRange = attackRange;
+		_attackSpeed = 1f / attackSpeed;
 	}
 
 	private bool IsAcquireTarget()
@@ -49,6 +51,22 @@ public class PlayerCharacter : Unit
 
 		_target = null;
 		return false;
+	}
+
+	private void Attack()
+	{
+		if (_currentAttackTime >= _attackSpeed)
+		{
+			if (_target != null)
+			{
+				_target.enemy.TakeDamage();
+				_currentAttackTime = 0f;
+			}
+		}
+		else
+		{
+			_currentAttackTime += Time.deltaTime;
+		}
 	}
 
 	private void OnDrawGizmos()
