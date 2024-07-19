@@ -24,7 +24,7 @@ public class Game : MonoBehaviour
 	{
 		TakeNextSpawnTime();
 		SetupPlayerSettings();
-		SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.enemyType);
+		SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.TakeRndEnemy()) ;
 	}
 
 	private void Update()
@@ -46,7 +46,7 @@ public class Game : MonoBehaviour
 		if (_spawnProgress >= _nextSpawnTime)
 		{
 			_spawnProgress -= _nextSpawnTime;
-			SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.enemyType);
+			SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.TakeRndEnemy());
 		}
 	}
 

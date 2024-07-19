@@ -19,13 +19,13 @@ MonoBehaviour:
       _max: 2
     _health: 3
   _mediumEnemy:
-    _prefab: {fileID: 0}
+    _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
     _speed:
       _min: 1.5517488
       _max: 2
     _health: 4
   _hardEnemy:
-    _prefab: {fileID: 0}
+    _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
     _speed:
       _min: 1.6585388
       _max: 2.622942
@@ -37,7 +37,7 @@ MonoBehaviour:
       _max: 1.1084361
     _health: 10
   _fastEnemy:
-    _prefab: {fileID: 0}
+    _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
     _speed:
       _min: 2.3203702
       _max: 3

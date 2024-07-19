@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Factory/BaseEnemyFactory")]
 public class BaseEnemyFactory : EnemyFactory
 {
     [SerializeField] private EnemyConfig _baseEnemy, _mediumEnemy, _hardEnemy, _fatEnemy, _fastEnemy;
