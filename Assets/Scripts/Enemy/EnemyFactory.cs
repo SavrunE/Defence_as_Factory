@@ -1,21 +1,34 @@
+using System;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-[CreateAssetMenu]
-public class EnemyFactory : GameObjectFactory
+public abstract class EnemyFactory : GameObjectFactory
 {
-    [SerializeField] private Enemy _prefab;
+	[Serializable]
+	public class EnemyConfig
+	{
+		[SerializeField] private Enemy _prefab;
+		[SerializeField, FloatRangeSlider(0.5f, 3f)]
+		private FloatRange _speed = new FloatRange(1f, 2f);
+		[SerializeField] private int _health = 3;
 
+		public Enemy prefab => _prefab;
+		public FloatRange speed => _speed;
+		public int health => _health;
+	}
 
-	public Enemy Get()
-    {
-        Enemy instance = CreateGameObjectInstance(_prefab);
-        instance.OriginFactory = this;
-        return instance;
-    }
+	public Enemy Get(EnemyType type)
+	{
+		var config = GetConfig(type);
+		Enemy instance = CreateGameObjectInstance(config.prefab);
+		instance.OriginFactory = this;
+		instance.Init(config.speed.RandomValueInRange, config.health);
+		return instance;
+	}
+
+	protected abstract EnemyConfig GetConfig(EnemyType type);
 
 	public void Reclaim(Enemy enemy)
-    {
-        Destroy(enemy.gameObject);
-    }
+	{
+		Destroy(enemy.gameObject);
+	}
 }

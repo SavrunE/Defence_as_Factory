@@ -12,4 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b74a94e38ec4024893f5ad4015e1353, type: 3}
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
+  _baseEnemy:
+    _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
+    _speed:
+      _min: 1
+      _max: 2
+    _health: 3
+  _mediumEnemy:
+    _prefab: {fileID: 0}
+    _speed:
+      _min: 1.5517488
+      _max: 2
+    _health: 4
+  _hardEnemy:
+    _prefab: {fileID: 0}
+    _speed:
+      _min: 1.6585388
+      _max: 2.622942
+    _health: 5
+  _fatEnemy:
+    _prefab: {fileID: 4959992847553555168, guid: 2503496c7f8dd8047bffb8f2320afccd, type: 3}
+    _speed:
+      _min: 0.5
+      _max: 1.1084361
+    _health: 10
+  _fastEnemy:
+    _prefab: {fileID: 0}
+    _speed:
+      _min: 2.3203702
+      _max: 3
+    _health: 2
