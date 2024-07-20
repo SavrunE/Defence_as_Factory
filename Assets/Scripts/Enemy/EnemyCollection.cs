@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -7,13 +7,19 @@ public class EnemyCollection
 {
 	public List<Enemy> _enemies = new List<Enemy>();
 
+	public Action onEnemiesZero;
+
 	public void Add(Enemy enemy)
 	{
 		_enemies.Add(enemy);
 	}
 
-	 public void GameUpdate()
+	public void GameUpdate()
 	{
+		if (_enemies.Count == 0)
+		{
+			onEnemiesZero?.Invoke();
+		}
 		for (int i = 0; i < _enemies.Count; i++)
 		{
 			if (_enemies[i].GameUpdate() == false)

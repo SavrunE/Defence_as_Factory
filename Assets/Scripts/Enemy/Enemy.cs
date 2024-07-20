@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
+	[SerializeField] private Animator _animator;
 	public EnemyFactory OriginFactory { get; set; }
-	private Sprite _sprite;
 	private float _speed;
 	private int _health;
-
+	private bool _isDead = false;
 	public bool GameUpdate()
 	{
-		if (_health <= 0)
+		if (_health <= 0 || _isDead)
 		{
 			OriginFactory.Reclaim(this);
 			return (false);
@@ -18,9 +18,14 @@ public class Enemy : Unit
 		return true;
 	}
 
+	public void Delete()
+	{
+		_isDead = true;
+	}
+
 	public void SpawnOn(EnemySpawnPoints spawnPoints)
 	{
-		transform.localPosition = spawnPoints.TakeRandomSpawnPoint().localPosition;
+		transform.localPosition = spawnPoints.TakeRandomSpawnPoint().position;
 	}
 
 	public void Init(float speed, int health)
@@ -29,12 +34,9 @@ public class Enemy : Unit
 		_health = health;
 	}
 
-	public void TakeDamage()
+	public void TakeDamage(int count)
 	{
-		_health--;
-	}
-
-	private void ShowDamage()
-	{
+		_health -= count;
+		_animator.SetBool("Attacked", true);
 	}
 }

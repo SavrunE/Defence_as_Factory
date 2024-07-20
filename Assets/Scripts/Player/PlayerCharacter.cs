@@ -8,6 +8,7 @@ public class PlayerCharacter : Unit
 	private TargetPoint _target = null;
 
 	private float _speed, _attackSpeed, _currentAttackTime;
+	private int _playerAttackDamage;
 
 	private Vector2 _horizontalBorders, _verticalBorders;
 
@@ -61,11 +62,12 @@ public class PlayerCharacter : Unit
 		transform.localPosition = nextPos;
 	}
 
-	public void InitPlayer(float playerSpeed, float attackRange, float attackSpeed)
+	public void InitPlayer(float playerSpeed, float attackRange, float attackSpeed, int playerAttackDamage)
 	{
 		_speed = playerSpeed;
 		_targetingRange = attackRange;
 		_attackSpeed = 1f / attackSpeed;
+		_playerAttackDamage = playerAttackDamage;
 	}
 
 	private bool IsAcquireTarget()
@@ -84,9 +86,7 @@ public class PlayerCharacter : Unit
 					_target = target.GetComponent<TargetPoint>();
 					distance = curDistance;
 				}
-
 			}
-
 			return true;
 		}
 
@@ -100,7 +100,7 @@ public class PlayerCharacter : Unit
 		{
 			if (_target != null)
 			{
-				_target.enemy.TakeDamage();
+				_target.enemy.TakeDamage(_playerAttackDamage);
 				_currentAttackTime = 0f;
 			}
 		}

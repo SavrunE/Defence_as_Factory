@@ -6,8 +6,8 @@ public class TargetPoint : MonoBehaviour
 	public Enemy enemy => _enemy;
 	public Vector3 position => transform.position;
 
-	private void Awake()
+	public void Deactivate()
 	{
-
+		gameObject.SetActive(false);
 	}
 }

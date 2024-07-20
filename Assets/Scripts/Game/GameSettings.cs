@@ -13,7 +13,8 @@ public class GameSettings : MonoBehaviour
 	[SerializeField] private PlayerCharacter _playerCharacter;
 	public PlayerCharacter playerCharacter => _playerCharacter;
 
-	public GameObject enemiesHolder;
+	public GameObject enemiesParent;
+	[SerializeField] private PlayerHealth _playerHealth;
 
 	public EnemyType TakeRndEnemy()
 	{
@@ -23,5 +24,10 @@ public class GameSettings : MonoBehaviour
 			return enemyType[rnd];
 		}
 		return EnemyType._baseEnemy;
+	}
+
+	public void SetHp(int count)
+	{
+		_playerHealth.SetHp(count);
 	}
 }

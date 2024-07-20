@@ -9,7 +9,7 @@ public struct FloatRange
     public float min => _min;
     public float max => _max;
 
-    public float RandomValueInRange
+    public float randomValueInRange
     {
         get => Random.Range(_min, _max);
     }
@@ -45,7 +45,7 @@ public struct IntRange
 	public int min => _min;
 	public int max => _max;
 
-	public int RandomValueInRange
+	public int randomValueInRange
 	{
 		get => Random.Range(_min, _max);
 	}

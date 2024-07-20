@@ -5,16 +5,17 @@ public class Game : MonoBehaviour
 	[SerializeField] private GameSettings _gameSettings;
 
 	private EnemyCollection _enemyCollection = new EnemyCollection();
-	[SerializeField, IntRangeSlider(1, 45)] 
-	private IntRange _enemyCount = new IntRange(10,15);
+	[SerializeField, IntRangeSlider(1, 45)]
+	private IntRange _enemyCount = new IntRange(10, 15);
+	private int _calcEnemyCount;
+	private int _currentEnemyCount;
 
-	[SerializeField, FloatRangeSlider(0.5f, 3f)] 
-	private FloatRange _spawnSpeed = new FloatRange(1f,2f);
+	[SerializeField, FloatRangeSlider(0.5f, 3f)]
+	private FloatRange _spawnSpeed = new FloatRange(1f, 2f);
 	private float _spawnProgress;
 	private float _nextSpawnTime;
 
-	
-
+	[SerializeField] private int _playerHealth = 5;
 	[SerializeField] private float _playerSpeed = 1f;
 	[SerializeField] private float _playerAttackRange = 8f;
 	[SerializeField] private float _playerAttackSpeed = 1f;
@@ -23,9 +24,18 @@ public class Game : MonoBehaviour
 
 	private void Awake()
 	{
+		_calcEnemyCount = _enemyCount.randomValueInRange;
+		_gameSettings.SetHp(_playerHealth);
 		TakeNextSpawnTime();
 		SetupPlayerSettings();
-		SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.TakeRndEnemy()) ;
+		SpawnEnemy(_gameSettings.enemyFactory, _gameSettings.TakeRndEnemy());
+		_enemyCollection.onEnemiesZero += WinGame;
+	}
+
+	private void WinGame()
+	{
+		if (_currentEnemyCount == _calcEnemyCount)
+			Debug.Log("end");
 	}
 
 	private void Update()
@@ -38,7 +48,7 @@ public class Game : MonoBehaviour
 
 	private void SetupPlayerSettings()
 	{
-		_gameSettings.playerCharacter.InitPlayer(_playerSpeed, _playerAttackRange, _playerAttackSpeed);
+		_gameSettings.playerCharacter.InitPlayer(_playerSpeed, _playerAttackRange, _playerAttackSpeed, _playerAttackDamage);
 	}
 
 	private void CheckEnemySpawn()
@@ -53,14 +63,18 @@ public class Game : MonoBehaviour
 
 	private void SpawnEnemy(EnemyFactory factory, EnemyType enemyType)
 	{
-		Enemy enemy = _gameSettings.enemyFactory.Get(enemyType);
-		enemy.transform.parent = _gameSettings.enemiesHolder.transform;
-		enemy.SpawnOn(_gameSettings.enemySpawnPoints);
-		_enemyCollection.Add(enemy);
+		if (_currentEnemyCount < _calcEnemyCount)
+		{
+			_currentEnemyCount++;
+			Enemy enemy = _gameSettings.enemyFactory.Get(enemyType);
+			enemy.transform.parent = _gameSettings.enemiesParent.transform;
+			enemy.SpawnOn(_gameSettings.enemySpawnPoints);
+			_enemyCollection.Add(enemy);
+		}
 	}
 
 	private void TakeNextSpawnTime()
 	{
-		_nextSpawnTime = _spawnSpeed.RandomValueInRange;
+		_nextSpawnTime = _spawnSpeed.randomValueInRange;
 	}
 }

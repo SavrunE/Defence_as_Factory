@@ -21,7 +21,7 @@ public abstract class EnemyFactory : GameObjectFactory
 		var config = GetConfig(type);
 		Enemy instance = CreateGameObjectInstance(config.prefab);
 		instance.OriginFactory = this;
-		instance.Init(config.speed.RandomValueInRange, config.health);
+		instance.Init(config.speed.randomValueInRange, config.health);
 		return instance;
 	}
 
