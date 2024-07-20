@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
 
 	
 
+	[SerializeField] private float _playerSpeed = 1f;
 	[SerializeField] private float _playerAttackRange = 8f;
 	[SerializeField] private float _playerAttackSpeed = 1f;
 	[SerializeField] private int _playerAttackDamage = 1;
@@ -37,7 +38,7 @@ public class Game : MonoBehaviour
 
 	private void SetupPlayerSettings()
 	{
-		_gameSettings.playerCharacter.InitPlayer(_playerAttackRange, _playerAttackSpeed);
+		_gameSettings.playerCharacter.InitPlayer(_playerSpeed, _playerAttackRange, _playerAttackSpeed);
 	}
 
 	private void CheckEnemySpawn()
@@ -53,6 +54,7 @@ public class Game : MonoBehaviour
 	private void SpawnEnemy(EnemyFactory factory, EnemyType enemyType)
 	{
 		Enemy enemy = _gameSettings.enemyFactory.Get(enemyType);
+		enemy.transform.parent = _gameSettings.enemiesHolder.transform;
 		enemy.SpawnOn(_gameSettings.enemySpawnPoints);
 		_enemyCollection.Add(enemy);
 	}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
 	public EnemyFactory OriginFactory { get; set; }
 	private Sprite _sprite;

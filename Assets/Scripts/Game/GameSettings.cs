@@ -13,6 +13,8 @@ public class GameSettings : MonoBehaviour
 	[SerializeField] private PlayerCharacter _playerCharacter;
 	public PlayerCharacter playerCharacter => _playerCharacter;
 
+	public GameObject enemiesHolder;
+
 	public EnemyType TakeRndEnemy()
 	{
 		if (enemyType.Length != 0)
