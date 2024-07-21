@@ -15,8 +15,8 @@ MonoBehaviour:
   _baseEnemy:
     _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}
     _speed:
-      _min: 1
-      _max: 2
+      _min: 0.9293598
+      _max: 1.9293597
     _health: 3
   _mediumEnemy:
     _prefab: {fileID: 4959992847553555168, guid: a1538c7954f21534bacf9dbd66eb0518, type: 3}

@@ -3,11 +3,12 @@ using UnityEngine;
 public class PlayerCharacter : Unit
 {
 	[SerializeField] private CharacterBorders _characterBorders;
+	[SerializeField] private GameObject _bullet;
 	[SerializeField] private float _characterSize = 0.35f;
 	private float _targetingRange;
 	private TargetPoint _target = null;
 
-	private float _speed, _attackSpeed, _currentAttackTime;
+	private float _speed, _attackSpeed, _bulletSpeed, _currentAttackTime;
 	private int _playerAttackDamage;
 
 	private Vector2 _horizontalBorders, _verticalBorders;
@@ -62,11 +63,12 @@ public class PlayerCharacter : Unit
 		transform.localPosition = nextPos;
 	}
 
-	public void InitPlayer(float playerSpeed, float attackRange, float attackSpeed, int playerAttackDamage)
+	public void InitPlayer(float playerSpeed, float attackRange, float attackSpeed, float bulletSpeed, int playerAttackDamage)
 	{
 		_speed = playerSpeed;
 		_targetingRange = attackRange;
 		_attackSpeed = 1f / attackSpeed;
+		_bulletSpeed = bulletSpeed;
 		_playerAttackDamage = playerAttackDamage;
 	}
 

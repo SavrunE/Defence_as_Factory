@@ -7,6 +7,7 @@ public class Enemy : Unit
 	private float _speed;
 	private int _health;
 	private bool _isDead = false;
+
 	public bool GameUpdate()
 	{
 		if (_health <= 0 || _isDead)
@@ -18,9 +19,14 @@ public class Enemy : Unit
 		return true;
 	}
 
-	public void Delete()
+	public void Dead()
 	{
 		_isDead = true;
+	}
+
+	public void Destruction()
+	{
+		Destroy(this.gameObject);
 	}
 
 	public void SpawnOn(EnemySpawnPoints spawnPoints)

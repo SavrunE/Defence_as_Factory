@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class EnemyFinish : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private Game _game;
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.TryGetComponent<TargetPoint>(out TargetPoint tp))
 		{
-			_playerHealth.LoseHp();
-			tp.enemy.Delete();
+			_game.TakeDamage();
+			tp.enemy.Dead();
 			tp.Deactivate();
 		}
 	}

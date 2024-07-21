@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 [Serializable]
 public class EnemyCollection
@@ -30,5 +29,14 @@ public class EnemyCollection
 				i -= 1;
 			}
 		}
+	}
+
+	public void DestructionAll()
+	{
+		foreach (var enemy in _enemies)
+		{
+			enemy.Destruction();
+		}
+		_enemies.Clear();
 	}
 }

@@ -15,6 +15,8 @@ public class GameSettings : MonoBehaviour
 
 	public GameObject enemiesParent;
 	[SerializeField] private PlayerHealth _playerHealth;
+	[SerializeField] private GameMenuWindow _gameMenuWindow;
+	public GameMenuWindow gameMenuWindow => _gameMenuWindow;
 
 	public EnemyType TakeRndEnemy()
 	{
@@ -26,8 +28,13 @@ public class GameSettings : MonoBehaviour
 		return EnemyType._baseEnemy;
 	}
 
-	public void SetHp(int count)
+	public void UpdatePlayerHealth(int count)
 	{
-		_playerHealth.SetHp(count);
+		_playerHealth.UpdatePlayerHealth(count);
+	}
+
+	public void ShowGameMenu(GameResultType gameType)
+	{
+		gameMenuWindow.Show(gameType);
 	}
 }
