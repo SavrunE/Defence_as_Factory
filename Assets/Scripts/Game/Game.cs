@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -5,6 +6,7 @@ public class Game : MonoBehaviour
 	[SerializeField] private GameSettings _gameSettings;
 
 	private EnemyCollection _enemyCollection = new EnemyCollection();
+	private BulletCollection _bulletCollection = new BulletCollection();
 	[SerializeField, IntRangeSlider(1, 45)]
 	private IntRange _enemyCount = new IntRange(10, 15);
 	private int _calcEnemyCount;
@@ -23,8 +25,11 @@ public class Game : MonoBehaviour
 	[SerializeField] private int _playerAttackDamage = 1;
 	[SerializeField] private float _playerBulletSpeed= 10f;
 
+	private static Game _instance;
+
 	private void Awake()
 	{
+		_instance = this;
 		_currentPlayerHealth = _playerHealth;
 		_calcEnemyCount = _enemyCount.randomValueInRange;
 		_gameSettings.UpdatePlayerHealth(_currentPlayerHealth);
@@ -37,9 +42,10 @@ public class Game : MonoBehaviour
 
 	private void Update()
 	{
-		CheckEnemySpawn();
+		TrySpawn();
 
 		_enemyCollection.GameUpdate();
+		_bulletCollection.GameUpdate();
 		_gameSettings.playerCharacter.GameUpdate();
 	}
 
@@ -84,7 +90,7 @@ public class Game : MonoBehaviour
 		_gameSettings.playerCharacter.InitPlayer(_playerSpeed, _playerAttackRange, _playerAttackSpeed, _playerBulletSpeed, _playerAttackDamage);
 	}
 
-	private void CheckEnemySpawn()
+	private void TrySpawn()
 	{
 		_spawnTimeProgress += Time.deltaTime;
 		if (_spawnTimeProgress >= _nextSpawnTime)
@@ -104,6 +110,13 @@ public class Game : MonoBehaviour
 			enemy.SpawnOn(_gameSettings.enemySpawnPoints);
 			_enemyCollection.Add(enemy);
 		}
+	}
+
+	public static Bullet SpawnBullet()
+	{
+		Bullet bullet = _instance._gameSettings.bulletFactory.bullet;
+		_instance._bulletCollection.Add(bullet);
+		return bullet;
 	}
 
 	private void TakeNextSpawnTime()

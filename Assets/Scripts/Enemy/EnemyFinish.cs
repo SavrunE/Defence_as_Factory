@@ -9,7 +9,7 @@ public class EnemyFinish : MonoBehaviour
 		if (collision.TryGetComponent<TargetPoint>(out TargetPoint tp))
 		{
 			_game.TakeDamage();
-			tp.enemy.Dead();
+			tp.enemy.Recycle();
 			tp.Deactivate();
 		}
 	}

@@ -8,7 +8,7 @@ public class Enemy : Unit
 	private int _health;
 	private bool _isDead = false;
 
-	public bool GameUpdate()
+	public override bool GameUpdate()
 	{
 		if (_health <= 0 || _isDead)
 		{
@@ -19,7 +19,7 @@ public class Enemy : Unit
 		return true;
 	}
 
-	public void Dead()
+	public override void Recycle()
 	{
 		_isDead = true;
 	}

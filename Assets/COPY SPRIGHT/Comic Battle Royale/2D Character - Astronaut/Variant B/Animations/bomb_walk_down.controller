@@ -135,7 +135,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: hitted
-  m_Speed: 20
+  m_Speed: 100
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4714215759416310204}

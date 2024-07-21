@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
+	[SerializeField] private BulletFactory _bulletFactory;
+	public BulletFactory bulletFactory => _bulletFactory;
 	[SerializeField] private EnemyFactory _enemyFactory;
 	public EnemyFactory enemyFactory => _enemyFactory;
 	[SerializeField] private EnemyType[] _enemyType;
@@ -14,6 +16,7 @@ public class GameSettings : MonoBehaviour
 	public PlayerCharacter playerCharacter => _playerCharacter;
 
 	public GameObject enemiesParent;
+	public GameObject bulletsParrent;
 	[SerializeField] private PlayerHealth _playerHealth;
 	[SerializeField] private GameMenuWindow _gameMenuWindow;
 	public GameMenuWindow gameMenuWindow => _gameMenuWindow;

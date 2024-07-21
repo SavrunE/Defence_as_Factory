@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerCharacter : Unit
 {
 	[SerializeField] private CharacterBorders _characterBorders;
-	[SerializeField] private GameObject _bullet;
+	[SerializeField] private Bullet _bullet;
 	[SerializeField] private float _characterSize = 0.35f;
 	private float _targetingRange;
 	private TargetPoint _target = null;
@@ -25,11 +26,12 @@ public class PlayerCharacter : Unit
 		_characterBorders.onBordersChanged -= ChangeMovableBorders;
 	}
 
-	public void GameUpdate()
+	public override bool GameUpdate()
 	{
 		IsAcquireTarget();
 		Attack();
 		MoveCharacter();
+		return true;
 	}
 
 	private void ChangeMovableBorders(Vector2 x, Vector2 y)
@@ -102,7 +104,9 @@ public class PlayerCharacter : Unit
 		{
 			if (_target != null)
 			{
-				_target.enemy.TakeDamage(_playerAttackDamage);
+				Game.SpawnBullet().Init(transform.position, _target, _bulletSpeed, _playerAttackDamage);
+				
+				//_target.enemy.TakeDamage(_playerAttackDamage);
 				_currentAttackTime = 0f;
 			}
 		}
